@@ -37,10 +37,13 @@
     <script>
       document.querySelector("#confirm").onclick = function() {
         var message = document.querySelector("#todo").value;
-        // console.log(message);
-        document.querySelector("#list").innerHTML +=
+        if(message==""){
+
+        }else{
+          document.querySelector("#list").innerHTML +=
           '<div class="todo-list-item p-2 text-center">' + message + "</div>";
-        document.querySelector("#todo").value = "";
+          document.querySelector("#todo").value = "";
+        }
       };
     </script>
   </body>
