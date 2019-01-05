@@ -1,0 +1,47 @@
+<!-- todo 리스트 스타일링, 삭제, 수정, 없을 경우 입력되지 않게, 버튼 RGB -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        width: 100%;
+        height: 100vh;
+      }
+      .template {
+        width: 600px;
+        height: 600px;
+      }
+      .todo-list-item {
+        width: 100%;
+        font-size: 14px;
+        border: 1px solid #f0f0f0;
+      }
+    </style>
+    <title>TodoList</title>
+  </head>
+  <body>
+    <div class="d-flex flex-column">
+      <div class="input-group">
+        <input id="todo" class="form-control" placeholder="To Do" />
+        <button id="confirm" class="btn btn-primary">확인</button>
+      </div>
+      <div id="list">
+        <div class="todo-list-item p-2 text-center">부트스트랩 공부하기</div>
+      </div>
+    </div>
+
+    <script>
+      document.querySelector("#confirm").onclick = function() {
+        var message = document.querySelector("#todo").value;
+        // console.log(message);
+        document.querySelector("#list").innerHTML +=
+          '<div class="todo-list-item p-2 text-center">' + message + "</div>";
+        document.querySelector("#todo").value = "";
+      };
+    </script>
+  </body>
+</html>
