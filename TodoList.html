@@ -20,6 +20,9 @@
         font-size: 14px;
         border: 1px solid #f0f0f0;
       }
+      .TodoButton{
+        width:100px;
+      }
     </style>
     <title>TodoList</title>
   </head>
@@ -27,22 +30,66 @@
     <div class="d-flex flex-column">
       <div class="input-group">
         <input id="todo" class="form-control" placeholder="To Do" />
-        <button id="confirm" class="btn btn-primary">확인</button>
+        <button id="confirm" class="btn btn-primary TodoButton">확인</button>
       </div>
-      <div id="list">
-        <div class="todo-list-item p-2 text-center">부트스트랩 공부하기</div>
-      </div>
+      <div id="list"></div>
     </div>
 
     <script>
+      var DeleteToDoItem=function(DOM){
+        console.log(DOM.parentElement.remove());
+      };
+
+      var modifyToDoItem=function(DOM) {
+        var modifyText=prompt();
+        if(modifyText==""){
+          alert("아무 것도 입력되어 있지 않습니다.");
+          modifyToDoItem(DOM);
+        }else{
+          console.log(DOM.parentElement.children[3].innerText=modifyText);
+        }
+      };
+
+      var changeColorRED=function(DOM){
+        console.log("Red");
+        DOM.parentElement.children[3].style.backgroundColor="red";
+        DOM.parentElement.children[3].style.color="white";
+      }
+
+      var changeColorGREEN=function(DOM){
+        console.log("Green");
+        DOM.parentElement.children[3].style.backgroundColor="green";
+        DOM.parentElement.children[3].style.color="white";
+      }
+
+      var changeColorBLUE=function(DOM){
+        console.log("Blue");
+        DOM.parentElement.children[3].style.backgroundColor="blue";
+        DOM.parentElement.children[3].style.color="white";
+      }
+
+      var changeColorWHITE=function(DOM){
+        console.log("RESET");
+        DOM.parentElement.children[3].style.backgroundColor="white";
+        DOM.parentElement.children[3].style.color="black";
+      }
+
+
       document.querySelector("#confirm").onclick = function() {
         var message = document.querySelector("#todo").value;
         if(message==""){
-
         }else{
           document.querySelector("#list").innerHTML +=
-          '<div class="todo-list-item p-2 text-center">' + message + "</div>";
-          document.querySelector("#todo").value = "";
+          '<div class="d-flex">'+
+            '<button class="btn btn-danger TodoButton" onclick="changeColorRED(this)">RED</button>'+
+            '<button class="btn btn-success TodoButton" onclick="changeColorGREEN(this)">GREEN</button>'+
+            '<button class="btn btn-primary TodoButton" onclick="changeColorBLUE(this)">BLUE</button>'+
+            '<div class="todo-list-item p-2 text-center">' + message + '</div>'+
+            '<button class="btn btn-info TodoButton" onclick="modifyToDoItem(this)">수정</button>'+
+            '<button class="btn btn-warning TodoButton" onclick="DeleteToDoItem(this)">삭제</button>'+
+            '<button class="btn btn-info TodoButton" onclick="changeColorWHITE(this)">RESET</button>'+
+          '</div>';
+        document.querySelector("#todo").value = "";
         }
       };
     </script>
